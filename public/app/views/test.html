@@ -1,0 +1,150 @@
+<div class="container">
+    <h3>Vouch Apss Test</h3>
+    <ul class="nav nav-pills nav-manage-licence" style="">
+        <li class="textCenter" ng-class="activeTab == 'book'? 'active':''">
+            <a ng-click="selectTab('book')" data-toggle="tab" class="tabLicence paddingProjectAmss">Book</a>
+        </li>
+        <li ng-class="activeTab == 'nlp'? 'active':''">
+            <a ng-click="selectTab('nlp')" data-toggle="tab" class="tabLicence paddingProjectAmss">NLP</a>
+        </li>
+    </ul>
+    <br>
+    <br>
+    <div clss="row" ng-show="activeTab == 'book'">
+        <div class="col-md-6">
+            <button class="btn btn-primary" ng-click="showAddNewBookModal()">Add New Book</button>
+        </div>
+        <div class="col-md-6" style="text-align: right">
+            Search: <input type="text" ng-model="searchString" required class="" ng-change="findSearch()">
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Publisher</th>
+                    <th scope="col">Isbn</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Synopsis</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="book in books track by $index">
+                    <th scope="row">{{$index + 1}}</th>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.publisher}}</td>
+                    <td>{{book.isbn}}</td>
+                    <td>{{book.genre}}</td>
+                    <td>{{book.synopsis}}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div clss="row" ng-show="activeTab == 'nlp'">
+        <div class="col-md-6">
+            <button class="btn btn-primary" ng-click="showAddNewIntentModal()">Add New Intent</button>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Intent Name</th>
+                    <th scope="col">List Expression</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="intent in intents track by $index">
+                    <th scope="row">{{$index + 1}}</th>
+                    <td>{{intent.intent}}</td>
+                    <td>
+                        <div ng-repeat="singleList in intent.list">
+                            <br>{{singleList}}
+                        </div>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" style="margin-top: top 30px;">
+            <input type="text" ng-model="textIntent" required class="form-control input-lg">
+            <br>Result: {{resultIntent}}
+            <button ng-click="checkIntent()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="addBook.html">
+    <form name="addBookForm" class="my-form" ng-submit="addBookForm.$valid && submitAddBook()" novalidate>
+        <div class="modal-header">
+            <h3 class="modal-title"> Add Book </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group" ng-class="{ 'has-error' : addBookForm.title.$invalid && addBookForm.title.$dirty }">
+                <label for="title">Title</label>
+                <input type="text" ng-model="title" required class="form-control input-lg">
+                <p ng-show="addBookForm.title.$dirty && addBookForm.title.$error.required || addBookForm.title.$error.unique" class="help-block">Error.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : addBookForm.author.$invalid && addBookForm.author.$dirty }">
+                <label for="author">Author</label>
+                <input type="text" name="author" ng-model="author" required class="form-control input-lg">
+                <p ng-show="addBookForm.author.$dirty && addBookForm.author.$error.required || addBookForm.author.$error.unique" class="help-block">Error.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : addBookForm.publisher.$invalid && addBookForm.publisher.$dirty }">
+                <label for="publisher">Publisher</label>
+                <input type="text" name="publisher" ng-model="publisher" required class="form-control input-lg">
+                <p ng-show="addBookForm.publisher.$dirty && addBookForm.publisher.$error.required || addBookForm.publisher.$error.unique" class="help-block">Error.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : addBookForm.isbn.$invalid && addBookForm.isbn.$dirty }">
+                <label for="isbn">ISBN</label>
+                <input type="text" name="isbn" ng-model="isbn" required class="form-control input-lg">
+                <p ng-show="addBookForm.isbn.$dirty && addBookForm.isbn.$error.required || addBookForm.isbn.$error.unique" class="help-block">Error.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : addBookForm.genre.$invalid && addBookForm.genre.$dirty }">
+                <label for="genre">Genre</label>
+                <input type="text" name="genre" ng-model="genre" required class="form-control input-lg">
+                <p ng-show="addBookForm.genre.$dirty && addBookForm.genre.$error.required || addBookForm.genre.$error.unique" class="help-block">Error.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : addBookForm.synopsis.$invalid && addBookForm.synopsis.$dirty }">
+                <label for="synopsis">Synopsis</label>
+                <textarea rows=7 class="form-control normalFont" name="synopsis" ng-model="synopsis" style="text-align: -webkit-left">Please say something about him/her..</textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit" ng-disabled="addBookForm.$invalid">Create</button>
+            <button class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</script>
+
+<script type="text/ng-template" id="addIntent.html">
+    <form name="addIntentForm" class="my-form" ng-submit="addIntentForm.$valid && submitAddIntent()" novalidate>
+        <div class="modal-header">
+            <h3 class="modal-title"> Add Book </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group" ng-class="{ 'has-error' : addIntentForm.intent.$invalid && addIntentForm.intent.$dirty }">
+                <label for="intent">Intent</label>
+                <input type="text" ng-model="intent" required class="form-control input-lg">
+                <p ng-show="addIntentForm.intent.$dirty && addIntentForm.intent.$error.required || addIntentForm.intent.$error.unique" class="help-block">Error.</p>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="form-group" ng-class="{ 'has-error' : addIntentForm.intent.$invalid && addIntentForm.intent.$dirty }">
+                <label for="intent">Expression <span class="glyphicon glyphicon-plus" style="font-size:24px" ng-click="pushNewToList()"></span></label> 
+                <div ng-repeat="expression in listNewExpresion track by $index" style="margin-top:5px;">
+                    <input type="text" ng-model="listNewExpresion[$index]" required class="form-control input-lg">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit" ng-disabled="addIntentForm.$invalid">Create</button>
+            <button class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</script>

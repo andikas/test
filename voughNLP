@@ -1,0 +1,283 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "fullSearchWhenGuessed": false,
+    "useNlg": true,
+    "useNeural": true,
+    "useLRC": true
+  },
+  "languages": [
+    "en"
+  ],
+  "intentDomains": {
+    "Greetings": "default",
+    "Bye": "default"
+  },
+  "nerManager": {
+    "settings": {},
+    "threshold": 0.8,
+    "builtins": [
+      "Number",
+      "Ordinal",
+      "Percentage",
+      "Age",
+      "Currency",
+      "Dimension",
+      "Temperature",
+      "DateTime",
+      "PhoneNumber",
+      "IpAddress",
+      "Boolean",
+      "Email",
+      "Hashtag",
+      "URL"
+    ],
+    "namedEntities": {}
+  },
+  "slotManager": {},
+  "classifiers": [
+    {
+      "language": "en",
+      "docs": [
+        {
+          "intent": "Greetings",
+          "utterance": [
+            "hi"
+          ]
+        },
+        {
+          "intent": "Greetings",
+          "utterance": [
+            "hello"
+          ]
+        },
+        {
+          "intent": "Greetings",
+          "utterance": [
+            "hai"
+          ]
+        },
+        {
+          "intent": "Bye",
+          "utterance": [
+            "see",
+            "you"
+          ]
+        },
+        {
+          "intent": "Bye",
+          "utterance": [
+            "i",
+            "have",
+            "to",
+            "go"
+          ]
+        },
+        {
+          "intent": "Bye",
+          "utterance": [
+            "bye"
+          ]
+        }
+      ],
+      "features": {
+        "hi": 1,
+        "hello": 1,
+        "hai": 1,
+        "see": 1,
+        "you": 1,
+        "i": 1,
+        "have": 1,
+        "to": 1,
+        "go": 1,
+        "bye": 1
+      },
+      "logistic": {
+        "observations": {
+          "Greetings": [
+            [],
+            [
+              1
+            ],
+            [
+              2
+            ]
+          ],
+          "Bye": [
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              6,
+              7,
+              8
+            ],
+            [
+              9
+            ]
+          ]
+        },
+        "labels": [
+          "Greetings",
+          "Bye"
+        ],
+        "observationCount": 6,
+        "theta": [
+          {
+            "elements": [
+              3.3974726836918947,
+              3.3974726836918947,
+              3.3974726836918947,
+              -2.792322180593408,
+              -2.792322180593408,
+              -1.573406681036983,
+              -1.573406681036983,
+              -1.573406681036983,
+              -1.573406681036983,
+              -4.864120709740885
+            ]
+          },
+          {
+            "elements": [
+              -3.397472683691896,
+              -3.397472683691896,
+              -3.397472683691896,
+              2.792322180593408,
+              2.792322180593408,
+              1.5734066810369822,
+              1.5734066810369822,
+              1.5734066810369822,
+              1.5734066810369822,
+              4.864120709740886
+            ]
+          }
+        ]
+      },
+      "useLRC": true,
+      "useNeural": true,
+      "neuralClassifier": {
+        "settings": {
+          "config": {
+            "activation": "leaky-relu",
+            "hiddenLayers": [],
+            "learningRate": 0.1,
+            "errorThresh": 0.0005,
+            "timeout": 60000
+          }
+        },
+        "classifierMap": {
+          "Greetings": {
+            "sizes": [
+              3,
+              1
+            ],
+            "layers": [
+              {
+                "hi": {},
+                "hello": {},
+                "hai": {}
+              },
+              {
+                "0": {
+                  "bias": 2.424973964691162,
+                  "weights": {
+                    "hi": 95.55583190917969,
+                    "hello": 95.5522689819336,
+                    "hai": 95.54875183105469
+                  }
+                }
+              }
+            ],
+            "outputLookup": false,
+            "inputLookup": true,
+            "activation": "leaky-relu",
+            "trainOpts": {
+              "iterations": 20000,
+              "errorThresh": 0.0005,
+              "log": false,
+              "logPeriod": 10,
+              "learningRate": 0.1,
+              "momentum": 0.1,
+              "callbackPeriod": 10,
+              "timeout": 120000,
+              "beta1": 0.9,
+              "beta2": 0.999,
+              "epsilon": 1e-8
+            }
+          },
+          "Bye": {
+            "sizes": [
+              10,
+              1
+            ],
+            "layers": [
+              {
+                "hi": {},
+                "hello": {},
+                "hai": {},
+                "see": {},
+                "you": {},
+                "i": {},
+                "have": {},
+                "to": {},
+                "go": {},
+                "bye": {}
+              },
+              {
+                "0": {
+                  "bias": 29.910646438598633,
+                  "weights": {
+                    "hi": -28.203100204467773,
+                    "hello": -28.186708450317383,
+                    "hai": -28.187536239624023,
+                    "see": 34.89002227783203,
+                    "you": 34.79511260986328,
+                    "i": 17.651716232299805,
+                    "have": 17.509124755859375,
+                    "to": 17.54808807373047,
+                    "go": 17.337238311767578,
+                    "bye": 65.52393341064453
+                  }
+                }
+              }
+            ],
+            "outputLookup": false,
+            "inputLookup": true,
+            "activation": "leaky-relu",
+            "trainOpts": {
+              "iterations": 20000,
+              "errorThresh": 0.0005,
+              "log": false,
+              "logPeriod": 10,
+              "learningRate": 0.1,
+              "momentum": 0.1,
+              "callbackPeriod": 10,
+              "timeout": 60000,
+              "beta1": 0.9,
+              "beta2": 0.999,
+              "epsilon": 1e-8
+            }
+          }
+        }
+      }
+    }
+  ],
+  "responses": {
+    "en": {
+      "Greetings": [
+        {
+          "response": "Greetings-1"
+        }
+      ],
+      "Bye": [
+        {
+          "response": "Bye-1"
+        }
+      ]
+    }
+  }
+}

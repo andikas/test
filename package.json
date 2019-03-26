@@ -1,0 +1,21 @@
+{
+  "name": "vouch",
+  "version": "1.0.0",
+  "description": "For Vouch testing App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "andikas",
+  "license": "ISC",
+  "dependencies": {
+    "algoliasearch": "^3.32.1",
+    "angular-ui-router": "^1.0.22",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "mongoose": "^5.4.19",
+    "node-cron": "^2.0.3",
+    "node-nlp": "^2.5.1",
+    "simple-web-notification": "^1.0.32"
+  }
+}
